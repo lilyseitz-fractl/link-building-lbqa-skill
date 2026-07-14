@@ -6,8 +6,6 @@ The human does the actual cross-checking; the skill is a **lookup-and-comment to
 
 This skill is **self-contained** — everything it needs is inside the `lbqa/` folder. There's nothing else to install and no internet connection required to run it.
 
-> **Note:** this is a separate skill from `/writeup`. They used to live together, but they're now split so each can be shared on its own with the person who uses it.
-
 **You'll need the Claude Code app to use it.** If you don't have Claude Code yet, install it first (search "Claude Code," see [claude.com/claude-code](https://claude.com/claude-code), or ask whoever set up your team's access).
 
 ---
@@ -43,7 +41,7 @@ cp -R link-building-lbqa-skill/lbqa ~/.claude/skills/lbqa
 
 **Or download without git:** on the [repo page](https://github.com/lilyseitz-fractl/link-building-lbqa-skill), click the green **Code** button → **Download ZIP**, unzip it, and copy the inner `lbqa` folder into `~/.claude/skills/`.
 
-Then **restart Claude Code** and type `/lbqa` (or "QA this write-up against the PC") to run it.
+Then **restart Claude Code** and start it (see [How to use it](#how-to-use-it) below).
 
 **To update later:** `cd` into your clone, run `git pull`, then re-copy the `lbqa` folder into `~/.claude/skills/`.
 
@@ -57,8 +55,7 @@ Then **restart Claude Code** and type `/lbqa` (or "QA this write-up against the 
 
 ## How to use it
 
-**1. Get your three inputs ready — each saved as an HTML file.**
-In Google Docs: **File → Download → Web Page (.html, zipped)**, then unzip. HTML matters because the comments and links embed in the file (the PC's comments often hold the real source data and instructions).
+**1. Get your inputs ready.** The skill works with three documents:
 
 | Input | What it is |
 |-------|-----------|
@@ -66,9 +63,27 @@ In Google Docs: **File → Download → Web Page (.html, zipped)**, then unzip. 
 | **WU** | The finished write-up you're checking. |
 | **CM doc** | The client's style guide. |
 
-For infographic checks, also have the **asset image files** on hand (the actual `.png`/`.jpg` files from the client asset folder, not just screenshots).
+Save each one as an **HTML file** — *not* a PDF or `.docx`. HTML preserves the links, images, and the embedded comments (the PC's comments often hold the real source data and instructions), which the skill needs to check against.
 
-**2. Start the skill.** Type `/lbqa` and point it at your files. It runs an **opening pass automatically** and reports a short summary in three buckets:
+**Saving a Google Doc as HTML:**
+1. Open the doc, then **File → Download → Web Page (.html, zipped)**.
+2. You'll get a `.zip` file. **Unzip it** (double-click it on Mac).
+3. Inside is an `.html` file (the doc) plus an `images/` folder (its images). Keep them together — that's what you'll upload.
+
+For infographic checks, also have the **asset image files** on hand — the actual `.png`/`.jpg` files from the client asset folder, not just screenshots.
+
+**2. Start the skill — upload your files *with* your first message.** In Claude Code, attach the files (drag them in or use the attach button) and send them together with a starting prompt. A few ways to start, depending on what you want to check first:
+
+- **Full QA of the write-up:**
+  > `/lbqa` — QA this write-up against the PC and CM doc *(attach the WU, PC, and CM doc HTML files)*
+- **Just check the infographics/assets first:**
+  > `/lbqa` — check these infographics against the PC *(attach the asset images and the PC)*
+- **Look up one specific claim:**
+  > `/lbqa` — where is this stat in the PC? "45% of renters said…" *(attach the PC)*
+
+You don't need all three docs to begin — give it what you have and it'll run the checks it can, then ask for anything missing.
+
+When you QA the write-up, it runs an **opening pass automatically** and reports a short summary in three buckets:
 
 - **CM-doc check** — heading case, banned words, required boilerplate, percentage formatting, meta length, alt text, etc.
 - **WU vs PC (first pass)** — number mismatches, unsupported qualifiers, stats in the wrong section.
@@ -91,9 +106,3 @@ The human cross-checks by hand *specifically because AI makes verification mista
 1. **Never state a PC value from memory** — it re-reads and quotes verbatim, every time.
 2. **Never guess** — ambiguous or multiple matches get shown to you to decide.
 3. **Treat "not in the PC" as a real search result** — only after looking across the whole PC (including embedded asset images), and it tells you where it looked.
-
----
-
-## Keeping it in sync with `/writeup`
-
-`reference/1-pc-qa-checklist.md` (the qualifier bands and math rules) and `reference/5-fractl-style-and-voice.md` are **copies** of the same files in the `/writeup` skill. They're duplicated on purpose so this skill stands alone. If those rules ever change in `/writeup`, update the copies here too.
