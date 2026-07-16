@@ -4,6 +4,11 @@ These are the notes the human will copy out of the chat and paste into a Google 
 comment (on the WU) or a comment on an image (for the designer). The human is doing
 the verification; your job is to hand them a note they can paste **without editing**.
 
+## First decide: does the DJ/designer need to weigh in?
+
+- **Clear-cut fix the CM doc or PC already settles** (title-case correction, documented terminology swap, a value that must match the PC): **skip the templates — hand back ONLY the corrected full text/value.** The human comments that corrected string directly onto the image or doc, and that's how the designer/DJ knows what to change. No "the subtitle reads X; per title case it should be Y; please update" — just `Y`.
+- **Needs a judgment call** (an unverifiable or ambiguous claim, a number reconcilable more than one way, a qualifier with several valid fixes, anything the docs don't settle): use the explanatory templates below so the DJ has the context to decide.
+
 ## What makes a good comment
 
 - **Specific.** Name the exact element and the exact numbers. "the 47% in the top-left
